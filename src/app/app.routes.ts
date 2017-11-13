@@ -8,7 +8,7 @@ import { HomeComponent } from './pages/home/home.component';
 
 import { SignDocumentComponent } from './pages/signdocument/signdocument.component';
 import { VerifyDocumentComponent } from './pages/verifydocument/verifydocument.component';
-
+import { VerifyIdentityComponent } from './pages/verifyidentity/verifyidentity.component';
 
 import { AddFundsComponent } from './pages/addfunds/addfunds.component';
 
@@ -19,6 +19,7 @@ export const ROUTES: Routes = [
   { path: 'addfunds',      component: AddFundsComponent },
   { path: 'signdocument',      component: SignDocumentComponent },
   { path: 'verifydocument',      component: VerifyDocumentComponent },
+  { path: 'verifyidentity',      component: VerifyIdentityComponent },
   { path: 'onboarding',  component: OnboardingComponent,
       children : [
         { path : 'welcome', component : OnboardingWelcomeComponent },

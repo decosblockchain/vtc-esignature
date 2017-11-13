@@ -35,7 +35,7 @@ import { OnboardingSetWalletPasswordComponent } from './pages/onboarding/setwall
 import { AddFundsComponent } from './pages/addfunds/addfunds.component';
 import { SignDocumentComponent } from './pages/signdocument/signdocument.component';
 import { VerifyDocumentComponent } from './pages/verifydocument/verifydocument.component';
-
+import { VerifyIdentityComponent } from './pages/verifyidentity/verifyidentity.component';
 // Services
 import { WalletService } from './services/wallet/wallet.service';
 import { BlockchainService } from './services/blockchain/blockchain.service';
@@ -72,7 +72,8 @@ const APP_PROVIDERS = [
     OnboardingSetWalletPasswordComponent,
     AddFundsComponent,
     SignDocumentComponent,
-    VerifyDocumentComponent
+    VerifyDocumentComponent,
+    VerifyIdentityComponent
   ],
   /**
    * Import Angular's modules.

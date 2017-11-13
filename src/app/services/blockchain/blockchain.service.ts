@@ -17,11 +17,13 @@ export class BlockchainService {
     totalCost : number = 200000;
     transactionCost : number = 100000;
     balance : BehaviorSubject<number>;
+    identityTransactions : BehaviorSubject<SignatureTx[]>;
     incomingTransactions : BehaviorSubject<SignatureTx[]>;
     outgoingTransactions : BehaviorSubject<SignatureTx[]>;
     
     constructor(private walletService : WalletService, private http : HttpClient) {
         this.balance = new BehaviorSubject<number>(0);
+        this.identityTransactions = new BehaviorSubject<SignatureTx[]>([]);
         this.incomingTransactions = new BehaviorSubject<SignatureTx[]>([]);
         this.outgoingTransactions = new BehaviorSubject<SignatureTx[]>([]);
         this.walletService.hasWallet().subscribe((hasWallet) => {
@@ -40,6 +42,11 @@ export class BlockchainService {
         this.updateIncomingTransactions();
         return this.incomingTransactions.asObservable();
     }
+    getIdentityTransactions() : Observable<SignatureTx[]> {
+        this.updateIdentityTransactions();
+        return this.identityTransactions.asObservable();
+    }
+
 
     getBalance() : Observable<number> {
         return this.balance.asObservable();
@@ -49,6 +56,21 @@ export class BlockchainService {
         this.updateIncomingTransactions();
         this.updateOutgoingTransactions();
     } 
+
+    updateIdentityTransactions() : void {
+        this.http.get<SignatureTx[]>("/backend/identityTransactions/" + this.walletService.getAddress()).subscribe((result) => {
+            var newArray = [];
+            result.forEach((tx) => {
+                if(tx.time == 0) newArray.push(tx);
+            });
+
+            result.sort((a,b) => { if(a.time < b.time) return -1; else if(b.time < a.time) return 1; else return 0; }).forEach((tx) => {
+                if(tx.time != 0) newArray.push(tx);
+            });
+
+            this.identityTransactions.next(newArray);
+        });
+    }
 
     updateIncomingTransactions() : void {
         this.http.get<SignatureTx[]>("/backend/esignatureTransactions/in/" + this.walletService.getAddress()).subscribe((result) => {

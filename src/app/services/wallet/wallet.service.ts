@@ -1,5 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import {Observable, BehaviorSubject} from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 import { Wallet } from '../../models/wallet';
 import * as bip39 from 'bip39';
@@ -24,7 +25,7 @@ export class WalletService {
 
     wallet : Wallet;
 
-    constructor(private ngZone : NgZone) {
+    constructor(private ngZone : NgZone, private http : HttpClient) {
         this.walletInitialized = new BehaviorSubject<boolean>(false);
         this.restoreWallet();
     }
@@ -116,6 +117,15 @@ export class WalletService {
         });
     }
 
+    getIdentity(name : string, email : string) : Observable<boolean> {
+        return this.http.post("/identify/identify", {
+            "name" : name,
+            "email" : email,
+            "address" : this.getAddress()
+        }).map((result : Response) => { 
+            return result.ok;
+        });
+    }
     
 
     encryptNewWallet(password : string, callback : () => void) : void {

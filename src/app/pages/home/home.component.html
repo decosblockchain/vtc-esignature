@@ -5,14 +5,24 @@
             </div>
 
     <div *ngIf="balance > 0" class="row">
-        <div class="col-lg-4 col-md-3">&nbsp;</div>
-        <div class="col-lg-2 col-md-3"><button class="btn walletChoiceButton" [routerLink]=" ['/signdocument'] "><i class="fa fa-pencil-square"></i><br/>Sign a document</button></div>
-        <div class="col-lg-2 col-md-3"><button class="btn walletChoiceButton" [routerLink]=" ['/verifydocument'] "><i class="fa fa-check-square-o"></i><br/>Verify a document</button></div>
-        <div class="col-lg-4 col-md-3">&nbsp;</div>
+        <div class="col-lg-3 col-md-3">&nbsp;</div>
+        <div class="col-lg-2 col-md-2"><button class="btn walletChoiceButton" [routerLink]=" ['/signdocument'] "><i class="fa fa-pencil-square"></i><br/>Sign a document</button></div>
+        <div class="col-lg-2 col-md-2"><button class="btn walletChoiceButton" [routerLink]=" ['/verifydocument'] "><i class="fa fa-check-square-o"></i><br/>Verify a document</button></div>
+        <div class="col-lg-2 col-md-2"><button class="btn walletChoiceButton" [routerLink]=" ['/verifyidentity'] "><i class="fa fa-check-square-o"></i><br/>Get an identity</button></div>
+        <div class="col-lg-3 col-md-3">&nbsp;</div>
     </div>
 
     <div *ngIf="balance == 0" class="row">
         <p>You seem to have no funds to do transactions. Please add funds by clicking on "Add" in the top right of your screen.</p>
+    </div>
+
+    <div *ngIf="transactions.length > 0" class="row">
+        <h1>Your identity</h1>
+    </div>
+
+    <div>
+        <p *ngIf="!hasIdentity">Your identity level is: <b>Anonymous</b>. Use the "Get an identity" button to upgrade to a higher identity level.</p>
+        <p *ngIf="hasIdentity">Your identity level is: <b>E-mail Verified</b>.</p>
     </div>
 
     <div *ngIf="transactions.length > 0" class="row">
