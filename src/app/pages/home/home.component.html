@@ -1,0 +1,44 @@
+<div>
+
+        <div class="row">
+                <h1>Welcome</h1>
+            </div>
+
+    <div *ngIf="balance > 0" class="row">
+        <div class="col-lg-4 col-md-3">&nbsp;</div>
+        <div class="col-lg-2 col-md-3"><button class="btn walletChoiceButton" [routerLink]=" ['/signdocument'] "><i class="fa fa-pencil-square"></i><br/>Sign a document</button></div>
+        <div class="col-lg-2 col-md-3"><button class="btn walletChoiceButton" [routerLink]=" ['/verifydocument'] "><i class="fa fa-check-square-o"></i><br/>Verify a document</button></div>
+        <div class="col-lg-4 col-md-3">&nbsp;</div>
+    </div>
+
+    <div *ngIf="balance == 0" class="row">
+        <p>You seem to have no funds to do transactions. Please add funds by clicking on "Add" in the top right of your screen.</p>
+    </div>
+
+    <div *ngIf="transactions.length > 0" class="row">
+        <h1>Recent transactions</h1>
+    </div>
+    <table *ngIf="transactions.length > 0" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Tx</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let transaction of transactions">
+                <td *ngIf="transaction.time == 0"><span color="red">(Unconfirmed)</span></td>
+                <td *ngIf="transaction.time != 0">{{ (transaction.time * 1000) | amDateFormat:'LL' }}</td>
+                <td> 
+                    <span *ngIf="transaction.script == '6a045349474e'">
+                        Signed {{getDocument(transaction.address)}}
+                    </span>
+                </td>
+                <td><a href="https://bchain.info/VTC/tx/{{transaction.txid}}"><i class="fa fa-chain"></i></a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+

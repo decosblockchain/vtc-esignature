@@ -1,0 +1,15 @@
+<div>
+  <h1>Sign Document</h1>
+  <p>Select the document file you wish to sign, and then press the Sign button.</p>
+  <input type="file" (change)="onFileChange($event)" />
+  <p *ngIf="address != ''">This document's address on the blockchain is: {{address}}</p>
+  <button *ngIf="!passwordRequired" class="btn" (click)="sign()">Sign</button>
+
+  <div *ngIf="passwordRequired">
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" [(ngModel)]="password" placeholder="Password">
+    </div>
+    <button class="btn" (click)="signPassword()">Sign</button>
+  </div>
+</div>

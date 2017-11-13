@@ -1,0 +1,29 @@
+<div>
+  <h1>Verify Document</h1>
+  <p>Select the document file you wish to verify.</p>
+  <input type="file" (change)="onFileChange($event)" />
+  <p *ngIf="address != ''">This document's address on the blockchain is: {{address}}</p>
+
+
+  <table *ngIf="address != ''" class="table table-striped">
+      <thead>
+          <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Tx</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let transaction of transactions">
+              <td *ngIf="transaction.time == 0"><span color="red">(Unconfirmed)</span></td>
+              <td *ngIf="transaction.time != 0">{{ (transaction.time * 1000) | amDateFormat:'LL' }}</td>
+              <td> 
+                  <span *ngIf="transaction.script == '6a045349474e'">
+                      Signed by {{transaction.address}}
+                  </span>
+              </td>
+              <td><a href="https://bchain.info/VTC/tx/{{transaction.txid}}"><i class="fa fa-chain"></i></a></td>
+          </tr>
+      </tbody>
+  </table>
+</div>

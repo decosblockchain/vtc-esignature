@@ -1,0 +1,46 @@
+html, body{
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif
+}
+
+a.active {
+  background-color: gray;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  line-height: 60px; /* Vertically center the text there */
+  background-color: #f5f5f5;
+}
+
+div.funds {
+  color: white;
+  width: 100%;
+  text-align : right;
+  position: relative;
+  div {
+      display: block;
+      float: right;
+      font-weight: bold;
+      line-height: 60px;
+  }
+  button {
+    color: white;
+      display: block;
+      float: right;
+      margin: 0px;
+      padding: 5px;
+      width: 100px;
+      height: 60px;
+      
+      font-size: 10pt;
+      i {
+          font-size: 16pt;
+      }
+      background-color: transparent;
+  }
+}
