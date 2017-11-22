@@ -1,40 +1,44 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" [routerLink]=" ['./'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        E-Signature
-        </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarsExample07">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a [routerLink]=" ['./'] "
-            routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-            Home
-            </a>
-          </li>
-        </ul>
-        <div class="funds" *ngIf="walletInitialized">
-                <button class="btn fundsBtn" [routerLink]=" ['/addfunds'] "><i class="fa fa-plus-circle"></i><br/>Add</button>
-                <div>{{balance | numeralPipe : '#,##0.########'}} VTC</div>
-                
-          </div>
-      </div>
-
+  <div class="leftBar" *ngIf="walletInitialized">
+    <a class="leftBarButton" [routerLink]=" ['/home'] "
+    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+    <span class="icon"><i class="fa fa-home"></i></span><br/>
+    Home
+    </a>
+    <a class="leftBarButton" [routerLink]=" ['/signdocument'] "
+    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+    <span class="icon"><i class="fa fa-pencil"></i></span><br/>
+    Sign Document
+    </a>
+    <a class="leftBarButton" [routerLink]=" ['/verifydocument'] "
+    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+    <span class="icon"><i class="fa fa-check-circle-o"></i></span><br/>
+    Verify Document
+    </a>
+    <a class="leftBarButton" [routerLink]=" ['/addressbook'] "
+    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+    <span class="icon"><i class="fa fa-address-book-o"></i></span><br/>
+    Address Book
+    </a>
+  </div>
+  
+  <div [ngClass]="{'topBar' : true, 'leftBarActive' : walletInitialized }">
+    <div class="brand">
+      Decos Blockchain E-Signature
+    </div>
+    <div class="funds" *ngIf="walletInitialized">
+      {{balance * 1000 | numeralPipe : '#,##0'}} mVTC&nbsp;&nbsp;
+      <button class="btn addFundsButton" [routerLink]=" ['/addfunds'] ">Add Funds</button>
      
     </div>
-  </nav>
+  </div>
 
-  <main role="main" class="container">
+  <main role="main" [ngClass]="{'container' : true, 'leftBarActive' : walletInitialized }">
     <router-outlet></router-outlet>
   </main>
 
 
   <footer class="footer">
     <div class="container">
-      <span class="text-muted">&copy; 2017 Decos Blockchain BV</span>
+      <span class="text-muted">&copy; 2017 Decos Blockchain BV - Defined by <a target="_blank" href="https://www.decos.com/">Decos</a></span>
     </div>
   </footer>

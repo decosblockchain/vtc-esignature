@@ -7,6 +7,7 @@ import * as bip39 from 'bip39';
 import * as crypto from 'crypto-browserify';
 import * as convertHex from 'convert-hex';
 import * as bitcoin from 'bitcoinjs-lib/src';
+import { Document } from '../../models/document';
 
 @Injectable()
 export class WalletService {
@@ -61,17 +62,21 @@ export class WalletService {
 
     setDocument(address : string, fileName : string) {
         if(!this.wallet.documents) {
-            this.wallet.documents = {};
+            this.wallet.documents = [];
         }
-        this.wallet.documents[address] = fileName;
+        if(!this.wallet.documents.find(d => d.address == address)) 
+        {
+            this.wallet.documents.push({ address : address, name : fileName, dateAdded : new Date() });
+        }
+        
         this.saveWallet();
     }
 
-    getDocument(address : string) { 
-        if(this.wallet.documents && this.wallet.documents[address]) { 
-            return this.wallet.documents[address];
+    getDocument(address : string) : Document { 
+        if(this.wallet.documents && this.wallet.documents.find(d => d.address == address)) { 
+            return this.wallet.documents.find(d => d.address == address);
         } else {
-            return "Unknown document (" + address + ")";
+            return { address : address, name : "Unknown document (" + address + ")" };
         }
     }
 
@@ -80,6 +85,11 @@ export class WalletService {
         var derived = node.derive(index);
         return derived.getAddress();
       }
+
+      getAllDocuments() : Document[] {
+        return this.wallet.documents.sort((a,b) => { if (a.dateAdded.valueOf() < b.dateAdded.valueOf()) return 1; else if (a.dateAdded.valueOf() > b.dateAdded.valueOf()) return -1; else return 0; });
+    }
+
 
     tryUnlockWallet(password : string, callback : (success : boolean) => void) : void {
         crypto.pbkdf2(password, this.wallet.checkPhraseSalt, 100000, 32, 'sha256', (err, encKey) => {

@@ -10,3 +10,67 @@ button.welcomeButton {
         font-size: 40pt;
     }
 }
+
+div.rightBorder {
+    border-right: 1px solid #a0a0a0;
+}
+
+div.verificationRow {
+    p { float: left; }
+    button.btn.upgradeIdentityButton {
+        font-size: 9pt;
+        text-transform: uppercase;
+        background-color: #007b9b;
+        color: #ffffff;
+        padding: 0.3rem;
+        font-size: 0.65rem;
+        margin-left: 10px;
+        margin-right: 10px;
+        float: right;
+        margin-top: 15px;
+      }
+}
+
+
+div.verificationRow {
+    background-color: #e0e0e0;
+    border-radius: 3px 3px 0px 0px;
+    color: #202020;
+    line-height: 60px;
+    border-bottom: 1px solid #a0a0a0;
+    div { 
+        p {
+            margin: 0px;
+            padding: 0px;
+        }
+    }
+}
+
+
+div.bottomRow {
+    background-color: #e0e0e0;
+    border-radius: 0px 0px 3px 3px ;
+    color: #202020;
+}
+
+div.row.headers {
+    background-color: #e0e0e0;
+    line-height: 40px;
+    div.col-6 {
+        padding: 0px 20px;
+        p {
+            margin: 0px;
+            padding: 0px;
+        }
+    }
+   
+}
+
+div.row.content {
+    div.col-6 {
+        padding: 0px;
+        table {
+            margin: 0px;
+        }
+    }
+}

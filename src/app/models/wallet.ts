@@ -1,3 +1,5 @@
+import { Document } from './document';
+
 export class Wallet {
   checkPhraseSalt? : string;
   checkPhraseIv? : string;
@@ -7,5 +9,5 @@ export class Wallet {
   cipherText? : string;
   iv? : string;
   salt? : string;
-  documents? : any;
+  documents? : Document[];
 }

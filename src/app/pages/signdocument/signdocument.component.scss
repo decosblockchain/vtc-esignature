@@ -1,1 +1,40 @@
 /*styles for welcome content only*/
+div.container.header {
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    padding: 15px;
+    .row {
+        margin: 0px;
+    }
+}
+
+p.pageHeader {
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 12pt;
+}
+
+div.fileSelector {
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    border: 1px dashed #a0a0a0;
+    a {
+        cursor : pointer;
+        text-decoration: underline;
+    }
+}
+
+button.btn.signButton {
+    font-size: 9pt;
+    text-transform: uppercase;
+    background-color: #007b9b;
+    color: #ffffff;
+    padding: 0.3rem;
+    font-size: 0.65rem;
+    margin-left: 10px;
+    margin-right: 10px;
+    float: right;
+    margin-top: 15px;
+}

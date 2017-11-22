@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import {Observable, BehaviorSubject} from 'rxjs';
 
 import { Wallet } from '../../models/wallet';
+import { Document } from '../../models/document';
 import * as bip39 from 'bip39';
 import * as crypto from 'crypto-browserify';
 import * as convertHex from 'convert-hex';
@@ -43,6 +44,10 @@ export class DocumentService {
 
     cacheDocumentAddress(document : File, address : string) {
         this.walletService.setDocument(address, document.name);
+    }
+
+    getAllDocuments() : Document[] {
+        return this.walletService.getAllDocuments();
     }
 
     

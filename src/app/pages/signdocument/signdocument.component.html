@@ -1,9 +1,33 @@
 <div>
-  <h1>Sign Document</h1>
-  <p>Select the document file you wish to sign, and then press the Sign button.</p>
-  <input type="file" (change)="onFileChange($event)" />
-  <p *ngIf="address != ''">This document's address on the blockchain is: {{address}}</p>
-  <button *ngIf="!passwordRequired" class="btn" (click)="sign()">Sign</button>
+
+  <div class="container header">
+    <div class="row">
+      <p class="pageHeader">Sign a document</p>
+      <div ng2FileDrop [ng2FileDropDisableStyles]="true" class="fileSelector" (ng2FileDropFileAccepted)="dragFileAccepted($event)">
+        Drop a file here, or <a (click)="file.click()">select one from your computer</a>.
+      </div>
+      <input id="fileSelector" style="display: none" #file type="file" (change)="onFileChange($event)" />
+    </div>
+
+    <div class="row">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Status</th>
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
+            <tbody>
+                <tr *ngFor="let document of documents">
+                    <td>{{document.name}}</td>
+                    <td>Not signed</td>
+                    <td><button class="btn signButton" (click)="sign(document)">Sign</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  </div>
 
   <div *ngIf="passwordRequired">
     <div class="form-group">

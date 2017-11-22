@@ -44,6 +44,7 @@ import { DocumentService } from './services/document/document.service';
 // Pipes
 import { NumeralPipe } from './pipes/numeral.pipe';
 
+import { Ng2FileDropModule }  from 'ng2-file-drop';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -84,6 +85,7 @@ const APP_PROVIDERS = [
     FormsModule,
     HttpModule,
     MomentModule,
+    Ng2FileDropModule,
     RouterModule.forRoot(ROUTES, {
       useHash: true,
       preloadingStrategy: PreloadAllModules

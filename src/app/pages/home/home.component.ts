@@ -13,6 +13,7 @@ import { WalletService } from '../../services/wallet/wallet.service';
 })
 export class HomeComponent implements OnInit {
   transactions : SignatureTx[] = [];
+  dummyTransactions : any[] = Array(8).fill(0);
   identityTransactions : SignatureTx[] = [];
   balance : number = 0;
   hasIdentity : boolean = false;
@@ -21,7 +22,8 @@ export class HomeComponent implements OnInit {
     walletService.hasWallet().subscribe((result) => {
       if(result) {
         blockchainService.getOutgoingTransactions().subscribe((result) => {
-          this.transactions = result;
+          this.transactions = result.slice(Math.min(7,result.length-1));
+          this.dummyTransactions = Array(8-this.transactions.length).fill(0);
         });
 
         blockchainService.getIdentityTransactions().subscribe((result) => {
