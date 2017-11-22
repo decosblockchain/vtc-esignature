@@ -19,6 +19,7 @@ FROM node:alpine
 
 # install npm ( in separate dir due to docker cache)
 ADD package.json /tmp/npm_inst/package.json
+RUN npm install -g typings
 RUN cd /tmp/npm_inst &&\
     npm install &&\
     mkdir -p /tmp/app &&\
